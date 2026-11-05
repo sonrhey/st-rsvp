@@ -6,7 +6,7 @@ import api from './server/api.js';
 const publicRoot = resolve('public');
 const musicRoot = resolve('music');
 const dataRoot = resolve(process.env.DATA_DIR || './data');
-const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.webp':'image/webp','.mp3':'audio/mpeg'};
+const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.webp':'image/webp','.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.mp3':'audio/mpeg'};
 const env = {
   RSVP_SHEETS_WEBHOOK: process.env.RSVP_SHEETS_WEBHOOK,
   TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,

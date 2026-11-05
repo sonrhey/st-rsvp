@@ -657,9 +657,11 @@ header nav a{
 
 /* Run the envelope in real stages; hidden paper cannot jump ahead of the flap. */
 .envelope{
-  transform-style:flat;--card-lift:-142px;--envelope-drop:45px;perspective:1200px}
+  transform-style:flat;--card-lift:-188px;--card-tuck:165px;--envelope-drop:45px;perspective:1200px}
+.pocket{
+  position:absolute;left:0;right:0;bottom:0;height:calc(100% + 420px);overflow:hidden;z-index:2;pointer-events:none}
 .insert{
-  visibility:hidden;transition:none!important;transform:none}
+  visibility:hidden;transition:none!important;transform:translateY(var(--card-tuck))}
 .flap{
   transition:none!important;transform:rotateX(0);z-index:6;backface-visibility:visible}
 .seal{
@@ -950,6 +952,46 @@ html{
   visibility:visible}
 .book-right>.page-number{
   grid-area:auto}
+
+.stage.card-ready{
+  z-index:6}
+.insert,
+.sealed .insert{
+  top:428px;left:30px;right:30px;bottom:auto;height:auto;aspect-ratio:1312/1199;padding:0;overflow:visible;background:transparent;box-shadow:none}
+.insert img{
+  width:100%;height:100%;object-fit:contain;object-position:center top;display:block;filter:drop-shadow(0 8px 12px #243c2838)}
+@media(max-width:760px){
+  .sealed .insert{
+  top:426px;left:18px;right:18px}
+  .sealed .envelope{
+  --card-lift:-146px;--card-tuck:120px}
+}
+@media(max-width:360px){
+  .sealed .envelope{
+  --card-lift:-122px;--card-tuck:105px}
+}
+@media(max-height:650px) and (max-width:760px){
+  .sealed .envelope{
+  --card-lift:-120px;--card-tuck:95px;--envelope-drop:35px}
+}
+@media(max-height:500px) and (min-width:761px){
+  .sealed .envelope{
+  --card-lift:-176px;--card-tuck:100px;--envelope-drop:35px}
+}
+.book-left{
+  padding:18px;background:#f7f4ea}
+.book-left:before{
+  display:none}
+.book-left img{
+  width:100%;height:100%;object-fit:contain;display:block}
+.venue-next{
+  margin-top:28px}
+@media(max-width:760px){
+  .tabbar{
+  flex-wrap:wrap}
+  .tabbar button{
+  white-space:normal;letter-spacing:.3px}
+}
 
 @media(max-width:760px){
   .book{
