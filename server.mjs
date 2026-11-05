@@ -9,6 +9,7 @@ const dataRoot = resolve(process.env.DATA_DIR || './data');
 const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.webp':'image/webp','.mp3':'audio/mpeg'};
 const env = {
   RSVP_SHEETS_WEBHOOK: process.env.RSVP_SHEETS_WEBHOOK,
+  TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
   BUCKET: { async put(key, value) {
     const path = resolve(dataRoot, key);
     if (!path.startsWith(dataRoot + sep)) throw Error('Invalid backup path');

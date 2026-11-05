@@ -208,6 +208,8 @@ textarea{
   resize:vertical;min-height:65px}
 input:focus,select:focus,textarea:focus{
   outline:none;border-bottom-color:#34483e;box-shadow:0 1px #34483e}
+.turnstile{
+  min-height:65px;margin:4px 0 22px}
 .submit{
   width:100%;padding:18px;background:#425647;border:0;color:#fff;font-size:11px;letter-spacing:2px}
 .submit:disabled{
