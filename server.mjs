@@ -4,8 +4,9 @@ import {resolve, sep} from 'node:path';
 import api from './server/api.js';
 
 const publicRoot = resolve('public');
+const musicRoot = resolve('music');
 const dataRoot = resolve(process.env.DATA_DIR || './data');
-const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.webp':'image/webp'};
+const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.webp':'image/webp','.mp3':'audio/mpeg'};
 const env = {
   RSVP_SHEETS_WEBHOOK: process.env.RSVP_SHEETS_WEBHOOK,
   BUCKET: { async put(key, value) {
@@ -35,8 +36,14 @@ const server = http.createServer(async (req, res) => {
       return;
     }
     if (!['GET','HEAD'].includes(req.method)) {res.writeHead(405);res.end();return;}
-    const path = resolve(publicRoot, '.' + decodeURIComponent(url.pathname === '/' ? '/index.html' : url.pathname));
-    if (!path.startsWith(publicRoot + sep)) {res.writeHead(403);res.end();return;}
+    const musicRequest = url.pathname.startsWith('/music/');
+    const root = musicRequest ? musicRoot : publicRoot;
+    const pathname = musicRequest ? url.pathname.slice('/music'.length) : (url.pathname === '/' ? '/index.html' : url.pathname);
+    let decoded;
+    try { decoded = decodeURIComponent(pathname); }
+    catch { res.writeHead(400); res.end('Bad request'); return; }
+    const path = resolve(root, '.' + decoded);
+    if (path !== root && !path.startsWith(root + sep)) {res.writeHead(403);res.end();return;}
     const bytes = await readFile(path);
     const extension = path.slice(path.lastIndexOf('.'));
     res.writeHead(200, {'Content-Type':types[extension] || 'application/octet-stream', 'X-Content-Type-Options':'nosniff'});

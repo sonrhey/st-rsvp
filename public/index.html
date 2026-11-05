@@ -24,6 +24,21 @@
 <ellipse cx="101" cy="35" rx="9" ry="26" transform="rotate(-15 101 35)"/>
 </g>
 </g>
+<g id="blossom" fill="currentColor">
+<ellipse cx="12" cy="6.2" rx="3.5" ry="6"/>
+<ellipse cx="12" cy="6.2" rx="3.5" ry="6" transform="rotate(72 12 12)"/>
+<ellipse cx="12" cy="6.2" rx="3.5" ry="6" transform="rotate(144 12 12)"/>
+<ellipse cx="12" cy="6.2" rx="3.5" ry="6" transform="rotate(216 12 12)"/>
+<ellipse cx="12" cy="6.2" rx="3.5" ry="6" transform="rotate(288 12 12)"/>
+<circle cx="12" cy="12" r="2.15" fill="#efe4c8"/>
+</g>
+<g id="petal" fill="currentColor">
+<path d="M12 1.8c3 3.4 4.6 6.6 4.6 9.6 0 3.8-2 6.7-4.6 8.6-2.6-1.9-4.6-4.8-4.6-8.6 0-3 1.6-6.2 4.6-9.6z"/>
+</g>
+<g id="leaf" fill="currentColor">
+<path d="M3.5 15.5C8 6.2 15.2 2.8 21 2.6c.2 6.2-2.2 13-9.6 16.6-1.4-3-3.8-5.2-7.9-3.7z"/>
+<path d="M8 14.6c2.4-2.2 5-3.6 8.4-4.4" fill="none" stroke="#f7f4eb" stroke-width=".7" opacity=".8"/>
+</g>
 </defs>
 </svg>
 <header>
@@ -280,6 +295,12 @@
 <p>WITH LOVE, ALWAYS. · 25.01.2027</p>
 <button class="text-link" id="replay">Replay the magic ↺</button>
 </footer>
+<div class="petals" id="petals" aria-hidden="true"></div>
+<button class="music-toggle" id="musicToggle" type="button" aria-pressed="false">Play music</button>
+<audio id="backgroundMusic" autoplay loop preload="auto" src="/music/Goodness%20of%20God%20Full%20Wedding%20Entrance.mp3"></audio>
+<script>
+(function(){var audio=document.getElementById('backgroundMusic');audio.volume=0.55;var start=function(){audio.play().catch(function(){})};start();audio.addEventListener('canplay',start,{once:true})})();
+</script>
 <dialog class="photo-dialog" id="photoDialog" aria-label="Photo preview">
 <img id="enlargedPhoto" alt="">
 <footer>

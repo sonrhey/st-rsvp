@@ -29,6 +29,25 @@ nav a{
   text-decoration:none;font-size:10px;letter-spacing:1.8px;text-transform:uppercase}
 .pill{
   border:1px solid var(--line);border-radius:30px;padding:13px 21px}
+.music-toggle{
+  position:fixed;z-index:40;right:22px;bottom:22px;border:1px solid var(--line);border-radius:30px;background:#f7f4ebf2;color:var(--ink);padding:12px 18px;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;box-shadow:0 8px 24px #34483e18}
+.music-toggle[aria-pressed="true"]{
+  background:#425647;color:#f7f4eb;border-color:#425647}
+.petals{
+  position:fixed;inset:0;z-index:35;overflow:hidden;pointer-events:none;opacity:0;transition:opacity 1.6s ease}
+body.music-playing .petals{
+  opacity:1}
+.floater{
+  position:absolute;top:-48px;animation:floral-drift linear infinite;animation-play-state:paused;will-change:transform}
+body.music-playing .floater{
+  animation-play-state:running}
+.floater svg{
+  display:block;overflow:visible;filter:drop-shadow(0 6px 8px #34483e14)}
+@keyframes floral-drift{
+  0%{transform:translate3d(0,-8vh,0) rotate(0deg) scale(var(--scale,1))}
+  30%{transform:translate3d(var(--sway,16px),28vh,0) rotate(110deg) scale(var(--scale,1))}
+  60%{transform:translate3d(calc(var(--sway,16px) * -.55),62vh,0) rotate(230deg) scale(var(--scale,1))}
+  100%{transform:translate3d(calc(var(--sway,16px) * .35),112vh,0) rotate(380deg) scale(var(--scale,1))}}
 .eyebrow{
   text-transform:uppercase;font-size:10px;letter-spacing:3px;line-height:1.7}
 h1,h2,h3,p{
@@ -849,6 +868,12 @@ body.sealed .photo-story{
 
 @media(max-width:760px){
   header nav .moments-nav{
+  display:none}
+  .floater:nth-child(n+11){
+  display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .petals{
   display:none}
 }
 
