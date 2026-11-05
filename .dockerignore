@@ -1,0 +1,5 @@
+.git
+.env
+.dev.vars
+data
+node_modules
