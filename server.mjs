@@ -46,7 +46,7 @@ const server = http.createServer(async (req, res) => {
     const path = resolve(root, '.' + decoded);
     if (path !== root && !path.startsWith(root + sep)) {res.writeHead(403);res.end();return;}
     const bytes = await readFile(path);
-    const extension = path.slice(path.lastIndexOf('.'));
+    const extension = path.slice(path.lastIndexOf('.')).toLowerCase();
     res.writeHead(200, {'Content-Type':types[extension] || 'application/octet-stream', 'X-Content-Type-Options':'nosniff'});
     res.end(req.method === 'HEAD' ? undefined : bytes);
   } catch (error) {

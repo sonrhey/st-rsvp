@@ -22,7 +22,7 @@ phase='ready';stage.classList.add('card-ready');unfoldButton.disabled=false;open
 function unfold(){if(phase!=='ready')return;phase='unfolding';unfoldButton.disabled=true;progress(2,'03 / OPENING OUR NEXT CHAPTER');document.querySelector('.hero').classList.add('departing');later(()=>{document.documentElement.classList.remove('sealed');document.body.classList.remove('sealed');mountTurnstile();document.querySelector('header nav').inert=false;document.querySelectorAll('.ticker,.invitation,.photo-story,.rsvp-section,.footer').forEach(e=>e.inert=false);document.querySelector('.book').classList.add('arriving');document.getElementById('invitation').scrollIntoView({behavior:'instant',block:'start'});document.querySelectorAll('.invitation .reveal').forEach(e=>e.classList.add('visible'));document.querySelector('.section-head h2').setAttribute('tabindex','-1');document.querySelector('.section-head h2').focus({preventScroll:true});later(()=>{phase='revealed';document.querySelector('.hero').classList.remove('departing');stage.classList.remove('card-ready');document.querySelector('.book').classList.remove('arriving');openText.disabled=false;openText.textContent='Read your invitation ↓';document.getElementById('stageNote').textContent='A little forever, now unfolded ♡'},1600)},650)}
 function resetInvitation(){openingRun++;envelopeAnimations.forEach(a=>a.cancel());envelopeAnimations=[];stage.classList.remove('seal-released','flap-is-open','paper-visible');timers.forEach(clearTimeout);timers=[];window.scrollTo({top:0,behavior:'instant'});phase='sealed';stage.classList.remove('opened','card-ready');document.querySelector('.hero').classList.remove('departing');document.querySelector('.book').classList.remove('arriving');document.documentElement.classList.add('sealed');document.body.classList.add('sealed');document.querySelector('header nav').inert=true;document.querySelectorAll('.ticker,.invitation,.photo-story,.rsvp-section,.footer').forEach(e=>e.inert=true);envelopeButton.disabled=false;envelopeButton.setAttribute('aria-expanded','false');openText.disabled=false;openText.textContent='Break the seal ↗';unfoldButton.disabled=true;document.getElementById('stageNote').textContent='01 / Tap the seal to begin';progress(0,'01 / THE SEALED LETTER');openText.focus({preventScroll:true})}
 document.querySelector('header nav').inert=true;document.querySelectorAll('.ticker,.invitation,.photo-story,.rsvp-section,.footer').forEach(e=>e.inert=true);if(location.hash)history.replaceState(null,'',location.pathname+location.search);window.scrollTo(0,0);envelopeButton.onclick=openCard;openText.onclick=openCard;unfoldButton.onclick=unfold;document.getElementById('replay').onclick=resetInvitation;
-let current=0,busy=false;document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{let n=+b.dataset.page;if(n===current||busy)return;busy=true;const leaf=document.getElementById('leaf');leaf.classList.add('turning');setTimeout(()=>{document.querySelectorAll('.page').forEach((p,i)=>p.hidden=i!==n);document.querySelectorAll('[data-page]').forEach((t,i)=>t.setAttribute('aria-selected',i===n));document.getElementById('pageNumber').textContent='0'+(n+1)+' / 03';current=n;leaf.classList.remove('turning');setTimeout(()=>busy=false,reduced?0:750)},reduced?0:375)});document.querySelector('.tabbar').onkeydown=e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();let n=e.key==='Home'?0:e.key==='End'?2:(current+(e.key==='ArrowRight'?1:2))%3;const t=document.getElementById('tab'+n);t.focus();t.click()};
+let current=0,busy=false;document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{let n=+b.dataset.page;if(n===current||busy)return;busy=true;const leaf=document.getElementById('leaf');leaf.classList.add('turning');setTimeout(()=>{document.querySelectorAll('.page').forEach(p=>p.hidden=p.id!=='page'+n);document.querySelectorAll('[data-page]').forEach(t=>t.setAttribute('aria-selected',t.dataset.page===String(n)));document.getElementById('pageNumber').textContent='0'+(n+1)+' / 04';current=n;leaf.classList.remove('turning');setTimeout(()=>busy=false,reduced?0:750)},reduced?0:375)});document.querySelector('.tabbar').onkeydown=e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();let n=e.key==='Home'?0:e.key==='End'?3:(current+(e.key==='ArrowRight'?1:3))%4;const t=document.getElementById('tab'+n);t.focus();t.click()};
 const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach(e=>observer.observe(e));let ticking=false;window.addEventListener('scroll',()=>{if(reduced||ticking)return;ticking=true;requestAnimationFrame(()=>{document.querySelectorAll('[data-speed]').forEach(e=>e.style.translate='0 '+Math.min(scrollY,800)*Number(e.dataset.speed)+'px');ticking=false})},{passive:true});
 let turnstileWidget;function mountTurnstile(tries=0){const host=document.getElementById('turnstile');if(!host)return;if(!window.turnstile){if(tries<20)setTimeout(()=>mountTurnstile(tries+1),250);return}if(turnstileWidget!==undefined)turnstile.remove(turnstileWidget);turnstileWidget=turnstile.render(host,{sitekey:'0x4AAAAAAF02iUc3n5imPmDe',theme:'light'})}
 document.getElementById('rsvpForm').onsubmit=async e=>{e.preventDefault();const form=e.target,button=form.querySelector('.submit'),status=document.getElementById('status');const token=window.turnstile&&turnstileWidget!==undefined?turnstile.getResponse(turnstileWidget):'';if(!token){status.textContent='Please confirm you are a guest, then send again.';return}button.disabled=true;status.textContent='Sealing your reply…';try{const fields=Object.fromEntries(new FormData(form));delete fields['cf-turnstile-response'];fields.turnstileToken=token;const response=await fetch('/api/rsvp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(fields)});if(!response.ok)throw Error((await response.text()).slice(0,180));status.textContent='Your reply is safely received. Thank you for being part of our story. ♡';form.reset()}catch(error){status.textContent=error.message||'Your reply could not be saved. Please try again in a moment.'}finally{button.disabled=false;if(window.turnstile&&turnstileWidget!==undefined)turnstile.reset(turnstileWidget)}};
@@ -38,3 +38,34 @@ musicToggle.addEventListener('click',()=>{musicOn=backgroundMusic.paused;if(musi
 backgroundMusic.addEventListener('play',showMusicState);backgroundMusic.addEventListener('pause',showMusicState);
 playMusic();
 addEventListener('pointerdown',event=>{if(!event.target.closest('#musicToggle'))playMusic()});
+(function(){
+  const schedule=document.querySelector('.schedule');
+  if(!schedule)return;
+  const svg=schedule.querySelector('.schedule-path');
+  const ribbon=svg.querySelector('.schedule-ribbon');
+  const line=svg.querySelector('.schedule-line');
+  function point(el){
+    let x=el.offsetWidth/2,y=el.offsetHeight/2,node=el;
+    while(node&&node!==schedule){x+=node.offsetLeft;y+=node.offsetTop;node=node.offsetParent}
+    return [x,y];
+  }
+  function draw(){
+    const icons=[...schedule.querySelectorAll('.schedule-icon')];
+    const w=schedule.clientWidth,h=schedule.clientHeight;
+    if(w<2||icons.length<2)return;
+    const pts=icons.map(point);
+    svg.setAttribute('viewBox','0 0 '+w+' '+h);
+    let d='M'+pts[0][0]+' '+pts[0][1];
+    for(let i=0;i<pts.length-1;i++){
+      const a=pts[i],b=pts[i+1],my=(a[1]+b[1])/2;
+      d+=' C'+a[0]+' '+my+','+b[0]+' '+my+','+b[0]+' '+b[1];
+    }
+    ribbon.setAttribute('d',d);
+    line.setAttribute('d',d);
+  }
+  const watch=new ResizeObserver(draw);
+  watch.observe(schedule);
+  addEventListener('resize',draw);
+  document.fonts&&document.fonts.ready.then(draw);
+  draw();
+})();
