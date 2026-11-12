@@ -174,12 +174,32 @@ p{
   font-size:30px;margin-bottom:25px}
 #page3 h3{
   font:700 14px/1.4 Arial,sans-serif;letter-spacing:0;margin-bottom:0;white-space:nowrap;text-align:left}
-#page3 p{
+#page3 p,#page4 p{
   font-size:12px;font-weight:400;text-align:justify;hyphens:manual}
-#page3 p>b:only-child{
+#page3 p>b:only-child,#page4 p>b:only-child{
   font-size:14px;font-weight:700}
-#page3 p b{
+#page3 p b,#page4 p b{
   font-size:12px;font-weight:700}
+.gift-icons{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:6px 0 16px;padding:0;list-style:none}
+.gift-icons li{
+  display:flex;align-items:flex-end;justify-content:center;min-width:0}
+.gift-icons img{
+  width:100%;height:150px;object-fit:contain;object-position:center bottom;display:block}
+.gift-banks{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 0;padding:0;list-style:none}
+.gift-banks li{
+  display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.gift-banks img{
+  display:block;width:100%;height:auto;border-radius:10px;border:1px solid #e3e6d8;background:#fff}
+.gift-banks span{
+  font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:var(--ink)}
+#page4{
+  align-self:start}
+#page4 .gift-icons{
+  margin:14px 0 18px}
+#page4 .gift-banks{
+  margin:14px 0 0}
 .reminders{
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:2px 0 16px;padding:0;list-style:none}
 .reminders li{
@@ -793,7 +813,7 @@ header nav a{
 .hero{
   background:#edece1}
 .hero:before{
-  content:'';position:absolute;inset:0;background:linear-gradient(90deg,#f7f4eb 5%,#f7f4ebf5 31%,#f7f4eb83 57%,#e5e9d537),url('/assets/engagement.webp') center 62%/cover no-repeat;opacity:.93;pointer-events:none}
+  content:'';position:absolute;inset:0;background:linear-gradient(90deg,#f7f4eb 5%,#f7f4ebf5 31%,#f7f4eb83 57%,#e5e9d537),url('/assets/prenup/R6II3194.jpg') center 62%/cover no-repeat;opacity:.93;pointer-events:none}
 .hero:after{
   content:'';position:absolute;inset:16px;border:1px solid #f7f4eb70;pointer-events:none}
 .hero-foot{
@@ -831,7 +851,9 @@ body.sealed .photo-story{
 .photo-button img{
   display:block;width:100%;height:116%;position:absolute;inset:-8% 0 auto;object-fit:cover;transition:scale 1s cubic-bezier(.2,.7,.2,1);will-change:translate}
 .photo-main img{
-  object-position:67% center}
+  object-position:center 46%}
+.polaroid .photo-button img{
+  object-position:center 40%}
 .photo-button:hover img{
   scale:1.035}
 .zoom-cue{
@@ -865,7 +887,7 @@ body.sealed .photo-story{
 .photo-strip{
   margin:100px -8vw -120px;min-height:330px;position:relative;display:grid;place-items:center;overflow:hidden;text-align:center;color:#f7f4eb;padding:60px 20px}
 .photo-strip>img{
-  position:absolute;inset:-15% 0;width:100%;height:130%;object-fit:cover;object-position:center 53%;will-change:translate}
+  position:absolute;inset:-15% 0;width:100%;height:130%;object-fit:cover;object-position:center 42%;will-change:translate}
 .photo-strip:after{
   content:'';position:absolute;inset:0;background:#1f302ccc}
 .photo-strip div{
@@ -899,7 +921,7 @@ body.sealed .photo-story{
 
 @media(max-width:760px){
   .hero:before{
-  background:linear-gradient(180deg,#f7f4ebec 0%,#f7f4ebd9 32%,#f7f4eb57 65%,#f7f4ebc9 100%),url('/assets/engagement.webp') 65% center/cover no-repeat}
+  background:linear-gradient(180deg,#f7f4ebec 0%,#f7f4ebd9 32%,#f7f4eb57 65%,#f7f4ebc9 100%),url('/assets/prenup/R6II3194.jpg') 65% center/cover no-repeat}
 .sample-label{
   font-size:7px;top:auto;bottom:32px;right:5vw;padding:6px 9px}
 .sealed .sample-label{
@@ -1005,11 +1027,11 @@ body.sealed .insert>span{
 .stage-note{
   z-index:10}
 .hero:before{
-  opacity:1;background:linear-gradient(90deg,#f7f4eb 5%,#f7f4ebf5 31%,#f7f4eb83 57%,#203b2218),url('/assets/engagement.webp') center 62%/cover no-repeat}
+  opacity:1;background:linear-gradient(90deg,#f7f4eb 5%,#f7f4ebf5 31%,#f7f4eb83 57%,#203b2218),url('/assets/prenup/R6II3194.jpg') center 62%/cover no-repeat}
 
 @media(max-width:760px){
   .hero:before{
-  background:linear-gradient(180deg,#f7f4ebed 0%,#f7f4ebd9 32%,#f7f4eb45 65%,#f7f4ebbf 100%),url('/assets/engagement.webp') 65% center/cover no-repeat}
+  background:linear-gradient(180deg,#f7f4ebed 0%,#f7f4ebd9 32%,#f7f4eb45 65%,#f7f4ebbf 100%),url('/assets/prenup/R6II3194.jpg') 65% center/cover no-repeat}
 .envelope{
   box-shadow:0 18px 32px #243c284d,0 3px 9px #243c2826}
 .stage>.botanical{
@@ -1081,7 +1103,7 @@ html{
 .portrait{
   margin:0 auto;max-width:100%;max-height:100%;min-height:0;flex:0 1 auto;aspect-ratio:3/4;padding:8px;background:#fbf9f2;border:1px solid #c5cdb6;border-radius:22px;box-shadow:0 16px 28px #46533b14}
 .portrait img{
-  width:100%;height:100%;object-fit:contain;object-position:center;display:block;border-radius:14px}
+  width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block;border-radius:14px}
 .tabbar{
   display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:flex-end;gap:8px}
 .tabbar button{
@@ -1090,8 +1112,12 @@ html{
 @media(max-width:760px){
   .book{
   grid-template-columns:minmax(0,1fr)}
+.book-monogram{
+  display:none}
 .book-left{
-  height:410px;min-height:410px}
+  height:auto;min-height:0;justify-content:center;padding:16px 16px 20px}
+.portrait{
+  width:100%;max-height:none}
 .book-right{
   min-height:520px}
 }
