@@ -181,11 +181,11 @@ p{
 #page3 p b,#page4 p b{
   font-size:12px;font-weight:700}
 .gift-icons{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:6px 0 16px;padding:0;list-style:none}
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0 16px;padding:0;list-style:none;align-items:end}
 .gift-icons li{
   display:flex;align-items:flex-end;justify-content:center;min-width:0}
 .gift-icons img{
-  width:100%;height:150px;object-fit:contain;object-position:center bottom;display:block}
+  width:100%;height:auto;object-fit:contain;display:block}
 .gift-banks{
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 0;padding:0;list-style:none}
 .gift-banks li{
@@ -197,7 +197,7 @@ p{
 #page4{
   align-self:start}
 #page4 .gift-icons{
-  margin:14px 0 18px}
+  margin:8px 0 16px}
 #page4 .gift-banks{
   margin:14px 0 0}
 .reminders{
@@ -1120,5 +1120,11 @@ html{
   width:100%;max-height:none}
 .book-right{
   min-height:520px}
+.tabbar{
+  flex-wrap:wrap;justify-content:flex-start;gap:8px;border-bottom:0;margin-bottom:22px}
+.tabbar button{
+  flex:0 0 auto;min-height:40px;padding:10px 12px;border:1px solid #c5cdb6;border-radius:999px;background:#f7f4eb;font-size:10px;letter-spacing:.5px;line-height:1}
+.tabbar button[aria-selected=true]{
+  background:#34483e;color:#f7f4eb;border-color:#34483e;border-bottom-width:1px}
 }
 
